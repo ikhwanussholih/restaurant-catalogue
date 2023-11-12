@@ -6,16 +6,18 @@ body {
 }
 
 .comment-box,
-.post-comment .list {
+.post-comment .list, form {
     background: #fff;
     border-radius: 6px;
     box-shadow: 0 2px 2px #002;
 }
+
 .post-comments .form {
     background: #fff;
     border-radius: 6px;
     box-shadow: 0 2px 2px #002;
-}.post-comment {
+}
+.post-comment {
     align-items: center;
     padding: 0 20px 0 0;
 }
@@ -88,11 +90,6 @@ body {
     border-radius: 50%;
 }
 
-.post-comment .list .user .user-meta {
-    margin-right: auto;
-    text-align: left;
-}
-
 .post-comment .list .user img {
     height: 38px;
     width: 38px;
@@ -110,7 +107,6 @@ body {
 }
 
 .post-comment .comment-post {
-    text-align: left;
     padding: 0 0 15px 58px;
 }
 

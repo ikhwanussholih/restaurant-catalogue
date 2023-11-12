@@ -7,12 +7,14 @@ import ButtonAddReview from '../../utils/review-button-initiator';
 const Detail = {
   async render() {
     return `
-    <h1 id="detail__restaurant">Detail Restaurant</h1>
-    <section class="detail__restaurant" id="detail__restaurant">
+    <h1 id="detail__restaurants">Detail Restaurant</h1>
+    <section class="detail__restaurant" id="detail__restaurant"></section>
 
     <h3 id="reviewer">Reviewer</h3>
-    <div class="post-comments"></div>
-    <div class="post-comment"></div>
+    <div clas="comment-session">
+      <div class="post-comments"></div>
+      <div class="post-comment"></div>
+    </div>
 
     <div id="likeButtonContainer"></div>
     `;
@@ -24,7 +26,9 @@ const Detail = {
     const restaurant = await RestaurantSource.detailRestaurant(url.id);
     const restaurantContainer = document.querySelector('#detail__restaurant');
     const restaurantReviewContainer = document.querySelector('.post-comment');
+    console.log(restaurantReviewContainer);
     const restaurantAddReviewContainer = document.querySelector('.post-comments');
+    console.log(restaurantAddReviewContainer);
 
     restaurantContainer.innerHTML = createRestaurantDetailTemplate(restaurant);
     restaurantAddReviewContainer.innerHTML = createRestaurantAddDetailReviewTemplate();
@@ -48,7 +52,7 @@ const Detail = {
       },
     });
 
-    const submitAddReview = document.querySelector('form__submit__button');
+    const submitAddReview = document.querySelector('.form__submit__button');
     submitAddReview.addEventListener('click', async () => {
       await ButtonAddReview.init({
         id: restaurant.id,
@@ -58,6 +62,7 @@ const Detail = {
         (customer) => createRestaurantDetailReviewTemplate(customer),
       ).join('');
     });
+    console.log(submitAddReview);
   },
 };
 

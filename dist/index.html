@@ -1,0 +1,83 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#805ece"/><title>Food Delicious</title><link rel="apple-touch-icon" href="/icons/icon-192x192.png"><link rel="manifest" href="./app.webmanifest"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"/><script src="https://use.fontawesome.com/b070c8f1df.js"></script><script defer="defer" src="app.bundle.js"></script></head><body><a href="#main-content" class="skip-link">Menuju ke konten</a><header><a href="/" class="logo">Foods Delicious</a> <button class="hamburger"><div class="line"></div><div class="line"></div><div class="line"></div></button><nav class="nav-bar"><ul><li><a href="#/list-restaurant">Restaurant</a></li><li><a href="#/like">Favorite</a></li><li><a href="https://www.linkedin.com/in/ikhwanus-sholih/?originalSubdomain=id">About Us</a></li></ul></nav></header><div class="heroContainer" id="home"><div class="slide-container"><div class="slides"><img src="./images/heros/hero-image_2.jpg" class="active" alt="Restauran"> <img src="./images/heros/hero-image_1.jpg" alt="Restauran"> <img src="./images/heros/hero-image_3.jpg" alt="Restauran"> <img src="./images/heros/hero-image_4.jpg" alt="Restauran"></div><div class="buttons"><span class="next">&#10095;</span> <span class="prev">&#10094;</span></div><div class="dotsContainer"><div class="dot active" attr="0" onclick="switchImage(this)"></div><div class="dot" attr="1" onclick="switchImage(this)"></div><div class="dot" attr="2" onclick="switchImage(this)"></div><div class="dot" attr="3" onclick="switchImage(this)"></div></div></div></div><main id="main-content" tabindex="0"></main><footer id="contact"><div class="footer-content"><h3>Contact</h3><p>Untuk lebih lanjut hubungi saya di</p><ul class="socials"><li><a href="https://instagram.com/ikhwanussholih" target="_blank"><i class="fa-brands fa-instagram"></i></a></li><li><a href="https://linkedin.com/in/ikhwanus-sholih-824a35217" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li><li><a href="https://wa.me/message/OMMSQAT4DKGSB1" target="_blank"><i class="fa-brands fa-whatsapp"></i></a></li><li><a href="https://facebook.com/ikhwanus.sholih13" target="_blank"><i class="fa-brands fa-facebook"></i></a></li></ul></div><div class="footer-bottom"><p>copyright &copy;2023 My Catalog Restaurant designed by <span>Ikhwanus Sholih</span></p></div></footer><script>// Access the Images
+    let slideImages = document.querySelectorAll('img');
+    // Access the next and prev buttons
+    let next = document.querySelector('.next');
+    let prev = document.querySelector('.prev');
+    // Access the indicators
+    let dots = document.querySelectorAll('.dot');
+    let counter = 0;
+
+    // Code for next button
+    next.addEventListener('click', slideNext);
+    function slideNext() {
+      slideImages[counter].style.animation = 'next1 0.5s ease-in forwards';
+      if (counter >= slideImages.length - 1) {
+        counter = 0;
+      }
+      else {
+        counter++;
+      }
+      slideImages[counter].style.animation = 'next2 0.5s ease-in forwards';
+      indicators();
+    }
+
+    // Code for prev button
+    prev.addEventListener('click', slidePrev);
+    function slidePrev() {
+      slideImages[counter].style.animation = 'prev1 0.5s ease-in forwards';
+      if (counter == 0) {
+        counter = slideImages.length - 1;
+      }
+      else {
+        counter--;
+      }
+      slideImages[counter].style.animation = 'prev2 0.5s ease-in forwards';
+      indicators();
+    }
+
+    // Auto slideing
+    function autoSliding() {
+      deletInterval = setInterval(timer, 3000);
+      function timer() {
+        slideNext();
+        indicators();
+      }
+    }
+    autoSliding();
+
+    // Stop auto sliding when mouse is over
+    const container = document.querySelector('.slide-container');
+    container.addEventListener('mouseover', function () {
+      clearInterval(deletInterval);
+    });
+
+    // Resume sliding when mouse is out
+    container.addEventListener('mouseout', autoSliding);
+
+    // Add and remove active class from the indicators
+    function indicators() {
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(' active', '');
+      }
+      dots[counter].className += ' active';
+    }
+
+    // Add click event to the indicator
+    function switchImage(currentImage) {
+      currentImage.classList.add('active');
+      let imageId = currentImage.getAttribute('attr');
+      if (imageId > counter) {
+        slideImages[counter].style.animation = 'next1 0.5s ease-in forwards';
+        counter = imageId;
+        slideImages[counter].style.animation = 'next2 0.5s ease-in forwards';
+      }
+      else if (imageId == counter) {
+        return;
+      }
+      else {
+        slideImages[counter].style.animation = 'prev1 0.5s ease-in forwards';
+        counter = imageId;
+        slideImages[counter].style.animation = 'prev2 0.5s ease-in forwards';
+      }
+      indicators();
+    }</script></body></html>
